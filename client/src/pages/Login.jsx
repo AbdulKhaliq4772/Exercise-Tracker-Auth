@@ -29,6 +29,7 @@ const Login = () => {
       setCookies("token", data.token);
       navigate("/dashboard");
       dispatch(loginSuccess(data));
+      localStorage.setItem("user", data.email);
     }
   };
 

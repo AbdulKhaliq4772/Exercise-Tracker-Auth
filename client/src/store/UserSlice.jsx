@@ -4,7 +4,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     user: {
-      email: "USERS",
+      email: localStorage.getItem("user"),
     },
   },
   reducers: {

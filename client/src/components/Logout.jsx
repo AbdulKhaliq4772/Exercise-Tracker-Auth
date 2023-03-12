@@ -8,6 +8,7 @@ const Logout = () => {
 
   const handleLogout = () => {
     removeCookie("token");
+    localStorage.removeItem("user");
     navigate("/");
   };
   return (
