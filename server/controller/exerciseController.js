@@ -44,9 +44,10 @@ const getExercises = async (req, res) => {
 
 //get Single Exercise
 const singleExercise = async (req, res) => {
+  console.log(req.data);
   const _id = req.data.user_id;
   try {
-    if (!mongoose.Types.ObjectId.isValid(req.body._id)) {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       res
         .status(400)
         .send({ error: "Something went wrong with the exercise id" });
@@ -54,7 +55,7 @@ const singleExercise = async (req, res) => {
     const user = await userSchema.findById(_id).populate("exercises");
     const exercises = user.exercises;
     const filteredArray = exercises.filter((exercise) => {
-      return exercise._id == req.body._id;
+      return exercise._id == req.params.id;
     });
     res.status(200).send(filteredArray[0]);
   } catch (error) {

@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../store/UserSlice";
 import LoginForm from "../components/Login";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,7 @@ const Login = () => {
   const [cookies, setCookies] = useCookies("token");
 
   const handleLogin = async (user) => {
+    console.log(user);
     const response = await fetch(" http://localhost:3001/login", {
       method: "POST",
       headers: {
@@ -27,13 +30,25 @@ const Login = () => {
     }
     if (response.ok) {
       setCookies("token", data.token);
-      navigate("/dashboard");
+      toast.success(
+        "Successfully Login",
+        {
+          position: toast.POSITION.TOP_CENTER,
+        },
+        { autoClose: false }
+      );
+      setTimeout(() => navigate("/dashboard"), 1000);
       dispatch(loginSuccess(data));
       localStorage.setItem("user", data.email);
     }
   };
 
-  return <LoginForm handleLogin={handleLogin} error={error} />;
+  return (
+    <>
+      <LoginForm handleLogin={handleLogin} error={error} />
+      <ToastContainer />
+    </>
+  );
 };
 
 export default Login;

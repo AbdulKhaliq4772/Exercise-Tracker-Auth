@@ -11,19 +11,21 @@ const Exercise = () => {
   }
 
   const { _id } = useParams();
-  const [responseData, setResponseData] = useState("");
+  const [responseData, setResponseData] = useState({});
   const [error, setError] = useState("");
 
   useEffect(() => {
     const getSingleExerciseData = async () => {
-      const response = await fetch("http://localhost:3001/singleExercise", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: getCookie("token"),
-        },
-        body: JSON.stringify({ _id: _id }),
-      });
+      const response = await fetch(
+        `http://localhost:3001/getExercises/${_id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: getCookie("token"),
+          },
+        }
+      );
       const data = await response.json();
       if (!response.ok) {
         setError(data.error);

@@ -17,7 +17,7 @@ const SingleExercise = ({ data, error }) => {
       ? (Image = hikeImage)
       : data.type == "swim"
       ? (Image = swimImage)
-      : data.type == "ride"
+      : data.type == "bike"
       ? (Image = rideImage)
       : data.type == "walk"
       ? (Image = walkImage)
@@ -33,7 +33,7 @@ const SingleExercise = ({ data, error }) => {
             onClick={() => {
               navigate("/dashboard");
             }}
-            className=" bg-emerald-200 py-2 px-6 mb-3 rounded-md hover:bg-emerald-300"
+            className=" bg-emerald-200 py-2 shadow-md px-6 mb-3 rounded-md hover:bg-emerald-300"
           >
             Back
           </button>

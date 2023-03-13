@@ -10,6 +10,6 @@ const {
 router.post("/addExercise", addExercise);
 router.get("/getExercises", getExercises);
 router.delete("/deleteExercise", deleteExercises);
-router.post("/:id", singleExercise);
+router.get("/getExercises/:id", singleExercise);
 
 module.exports = router;

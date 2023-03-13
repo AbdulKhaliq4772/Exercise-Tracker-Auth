@@ -19,9 +19,8 @@ app.use((req, res, next) => {
 });
 
 app.use(
-  ["/addExercise", "/getExercises", "/deleteExercise", "/singleExercise"],
+  ["/addExercise", "/getExercises", "/deleteExercise", "/getExercises/:id"],
   (req, res, next) => {
-    // console.log(req.headers["authorization"]);
     const token = req.headers["authorization"];
     if (!token) {
       res.json("Please Login");

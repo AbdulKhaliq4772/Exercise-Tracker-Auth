@@ -7,6 +7,7 @@ import Profile from "../components/Profile";
 import { useCookies } from "react-cookie";
 import SmallForm from "../components/SmallForm";
 import Logout from "../components/Logout";
+import Dialog from "../components/Dialog";
 
 const Dashboard = () => {
   const [cookies] = useCookies("token");

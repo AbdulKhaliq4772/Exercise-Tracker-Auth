@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeToggle } from "../store/ToggleSlice";
 import getCookie from "../utils/cookie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddExerciseForm = () => {
   const dispatch = useDispatch();
@@ -36,9 +38,17 @@ const AddExerciseForm = () => {
 
     if (!response.ok) {
       setError(data.error);
-    }
-    if (response.ok) {
+    } else {
       dispatch(changeToggle());
+      toast("Exercise Added", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+      setName("");
+      setDescription("");
+      setType("");
+      setDuration("");
+      setDate("");
+      setError("");
     }
   };
   return (
@@ -49,6 +59,7 @@ const AddExerciseForm = () => {
           <label className=" font-semibold">Name</label>
           <input
             className=" bg-emerald-50 py-2 px-1 rounded-md my-2"
+            placeholder="Enter exercise name"
             type="text"
             name="name"
             onChange={(e) => {
@@ -61,6 +72,7 @@ const AddExerciseForm = () => {
           <label>Description</label>
           <input
             className=" bg-emerald-50 py-2 px-1 rounded-md my-2"
+            placeholder="Enter Description"
             type="text"
             name="description"
             onChange={(e) => {
@@ -91,6 +103,7 @@ const AddExerciseForm = () => {
           <label>Duration (in min)</label>
           <input
             className=" bg-emerald-50 py-2 px-1 rounded-md my-2"
+            placeholder="Enter duration"
             type="number"
             name="type"
             onChange={(e) => {
@@ -103,6 +116,7 @@ const AddExerciseForm = () => {
           <label>Date</label>
           <input
             className=" bg-emerald-50 py-2 px-1 rounded-md my-2"
+            placeholder="Enter date"
             type="date"
             name="type"
             onChange={(e) => {
@@ -118,11 +132,13 @@ const AddExerciseForm = () => {
           Add
         </button>
       </form>
+
       {error && (
         <div className=" text-red-500 font-semibold text-center uppercase">
           {error}
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

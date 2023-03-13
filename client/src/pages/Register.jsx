@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RegisterForm from "../components/Register";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -18,7 +20,14 @@ const Register = () => {
     if (!response.ok) {
       setError(data.error);
     } else {
-      navigate("/login");
+      toast.success(
+        "Successfully Registered",
+        {
+          position: toast.POSITION.TOP_CENTER,
+        },
+        { autoClose: 5000 }
+      );
+      setTimeout(() => navigate("/login"), 1000);
     }
   };
   return <RegisterForm RegisterUser={handleRegister} error={error} />;
